@@ -8,7 +8,8 @@ module.exports = {
         cardhover: '#9CA3AF',
         card: '#4B5563',
         cardbanner: '#10B981',
-        searchbar: '#111827'
+        searchbar: '#111827',
+        buttons: '#6D28D9'
       }
     },
   },
