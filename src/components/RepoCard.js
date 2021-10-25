@@ -1,5 +1,8 @@
 import React from 'react';
 
+// IMAGES
+import { ReactComponent as StarIcon } from '../imgs/star.svg';
+
 // ----------------------------------------------------------------------------------
 // ---------------------------------- REPO CARD -------------------------------------
 // ----------------------------------------------------------------------------------
@@ -9,15 +12,14 @@ function RepoCard({ data }) {
     name,
     owner,
     language,
-    description,
     stargazers_count
   } = data;
 
   return (
-    <div className='hover:bg-cardhover p-4 rounded-md'>
+    <div className='hover:bg-cardhover p-4 rounded-md transform transition duration-500 hover:scale-105 cursor-pointer'>
       <div className='sm:flex bg-card rounded-t-md'>
         <img
-          className='h-full w-full sm:h-32 sm:w-32 rounded-tl-md rounded-tr-md sm:rounded-tr-none'
+          className='h-full w-full sm:h-28 sm:w-28 rounded-tl-md rounded-tr-md sm:rounded-tr-none'
           src={owner.avatar_url}
           alt='user image'
         />
@@ -28,10 +30,14 @@ function RepoCard({ data }) {
           </div>
         </div>
       </div>
-      <div className='bg-cardbanner rounded-b-md p-1 pl-3'>
-        <h3 className='font-bold'>
-          {stargazers_count}
-        </h3>
+      <div className='flex justify-between bg-cardbanner rounded-b-md p-1 px-3'>
+        <h3>{language}</h3>
+        <div className='flex'>
+          <StarIcon className='self-center w-5 h-5 mr-1.5' />
+          <h3 className='font-bold'>
+            {stargazers_count}
+          </h3>
+        </div>
       </div>
     </div>
   );
