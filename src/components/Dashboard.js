@@ -25,11 +25,11 @@ function Dashboard() {
   }, [])
 
   return (
-    <>
+    <div>
       {repos.map(i =>
         <RepoCard key={i.id} data={i} />
       )}
-    </>
+    </div>
   );
 }
 

@@ -14,7 +14,7 @@ function RepoCard({ data }) {
   } = data;
 
   return (
-    <div>
+    <div className='flex'>
       <img src={owner.avatar_url} alt='user_image' />
       <h1>
         Repo: {name}

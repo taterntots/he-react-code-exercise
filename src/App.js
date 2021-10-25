@@ -1,17 +1,14 @@
 import React from 'react';
 
 // ROUTING
-import {Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 // COMPONENTS
 import Dashboard from './components/Dashboard';
 
-// STYLING
-import './App.css';
-
 function App() {
   return (
-    <div className='App'>
+    <div className='min-h-screen bg-sitebackground text-white'>
       <Switch>
         <Route path='/' component={Dashboard} />
       </Switch>
