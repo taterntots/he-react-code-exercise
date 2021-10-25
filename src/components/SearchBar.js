@@ -22,9 +22,9 @@ function SearchBar({ repos, setSearchResults }) {
   }, [searchTerm, repos]);
 
   return (
-    <div>
+    <div className='p-4 bg-searchbar'>
       <input
-        className='text-black'
+        className='w-1/3 p-2 rounded-md text-black'
         placeholder='Search by repo name'
         onChange={handleInputChange}
         type='search'

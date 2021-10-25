@@ -29,7 +29,7 @@ function Dashboard() {
   return (
     <>
       <SearchBar repos={repos} setSearchResults={setSearchResults} />
-      <div className='grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
+      <div className='px-8 pb-8 pt-4 grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
         {searchResults.map(i =>
           <RepoCard key={i.id} data={i} />
         )}
