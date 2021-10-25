@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // COMPONENTS
 import RepoCard from './RepoCard';
+import SearchBar from './SearchBar';
 
 // ----------------------------------------------------------------------------------
 // --------------------------------- DASHBOARD --------------------------------------
@@ -10,6 +11,7 @@ import RepoCard from './RepoCard';
 
 function Dashboard() {
   const [repos, setRepos] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   // UseEffect to hit the github repositories API and set data to state
   useEffect(() => {
@@ -25,11 +27,14 @@ function Dashboard() {
   }, [])
 
   return (
-    <div className='grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
-      {repos.map(i =>
-        <RepoCard key={i.id} data={i} />
-      )}
-    </div>
+    <>
+      <SearchBar repos={repos} setSearchResults={setSearchResults} />
+      <div className='grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
+        {searchResults.map(i =>
+          <RepoCard key={i.id} data={i} />
+        )}
+      </div>
+    </>
   );
 }
 
