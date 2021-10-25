@@ -11,8 +11,6 @@ import RepoCard from './RepoCard';
 function Dashboard() {
   const [repos, setRepos] = useState([]);
 
-  console.log(repos)
-
   // UseEffect to hit the github repositories API and set data to state
   useEffect(() => {
     axios({
