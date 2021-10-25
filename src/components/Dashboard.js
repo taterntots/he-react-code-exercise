@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// COMPONENTS
+import RepoCard from './RepoCard';
+
 // ----------------------------------------------------------------------------------
 // --------------------------------- DASHBOARD --------------------------------------
 // ----------------------------------------------------------------------------------
 
 function Dashboard() {
   const [repos, setRepos] = useState([]);
+
+  console.log(repos)
 
   // UseEffect to hit the github repositories API and set data to state
   useEffect(() => {
@@ -17,14 +22,15 @@ function Dashboard() {
         Accept: 'application/vnd.github.v3+json'
       },
     }).then(res => {
-      console.log(res)
       setRepos(res.data.items);
-    })
+    });
   }, [])
 
   return (
     <>
-      Dashboard
+      {repos.map(i =>
+        <RepoCard key={i.id} data={i} />
+      )}
     </>
   );
 }
