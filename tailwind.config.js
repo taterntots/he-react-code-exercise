@@ -4,7 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        sitebackground: '#282c34'
+        sitebackground: '#282c34',
+        cardhover: '#9CA3AF',
+        card: '#4B5563',
+        cardbanner: '#10B981'
       }
     },
   },
