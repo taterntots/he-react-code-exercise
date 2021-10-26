@@ -61,7 +61,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
         >
           {isLoading ? (
             <div className='px-3'>
-              <LoadSpinner />
+              <LoadSpinner size={20} />
             </div>
           ) : 'Submit'}
         </button>

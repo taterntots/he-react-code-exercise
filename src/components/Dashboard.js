@@ -4,8 +4,8 @@ import axios from 'axios';
 // COMPONENTS
 import RepoCard from './RepoCard';
 import SearchBar from './SearchBar';
-import FilterBar from './FilterBar';
 import LoadSpinner from './utils/LoadSpinner';
+import SearchError from './utils/SearchError';
 
 // ----------------------------------------------------------------------------------
 // --------------------------------- DASHBOARD --------------------------------------
@@ -41,15 +41,19 @@ function Dashboard() {
   return (
     <>
       <SearchBar repos={repos} setSearchTerm={setSearchTerm} sortType={sortType} setSortType={setSortType} setLanguageSearchResults={setLanguageSearchResults} isLoading={isLoading} />
-      {/* <FilterBar setSortType={setSortType} /> */}
-      {!isLoading && (
+      {isLoading ? (
+        <div className='min-h-screen mt-10'>
+          <LoadSpinner size={100} />
+        </div>
+      ) : languageSearchResults.length > 0 ? (
         <div className='px-8 pb-8 pt-4 grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
           {languageSearchResults.map(i =>
             <RepoCard key={i.id} data={i} />
           )}
         </div>
+      ) : (
+        <SearchError searchTerm={searchTerm} />
       )}
-      {/* <LoadSpinner /> */}
     </>
   );
 }
