@@ -21,7 +21,7 @@ function RepoCard({ data }) {
         <img
           className='h-full w-full sm:h-28 sm:w-28 rounded-tl-md rounded-tr-md sm:rounded-tr-none'
           src={owner.avatar_url}
-          alt='user image'
+          alt='user'
         />
         <div className='sm:flex sm:justify-between text-center sm:text-left w-full overflow-hidden'>
           <div className='sm:mx-4 self-center pb-2 sm:pb-0 min-w-0'>
