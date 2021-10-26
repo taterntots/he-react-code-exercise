@@ -6,6 +6,7 @@ import moment from 'moment';
 import { ReactComponent as StarIcon } from '../imgs/star.svg';
 import { ReactComponent as LockIcon } from '../imgs/lock.svg';
 import { ReactComponent as UnlockIcon } from '../imgs/unlock.svg';
+import { ReactComponent as GithubIcon } from '../imgs/github.svg';
 
 // ----------------------------------------------------------------------------------
 // ------------------------------ REPO DETAILS PAGE ---------------------------------
@@ -19,9 +20,9 @@ function RepoDetailsPage({ open, setOpen, data }) {
     language,
     description,
     stargazers_count,
-    updated_at
+    updated_at,
+    html_url
   } = data;
-  console.log('WOOT', data)
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -63,16 +64,21 @@ function RepoDetailsPage({ open, setOpen, data }) {
             <div className='inline-block w-full mx-6 align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all max-w-lg'>
               <div className='bg-white text-black'>
                 <div className='py-5 px-8 bg-cardbanner text-white'>
-                  <h1 className='mb-5 text-2xl font-bold'>
-                    {name}
-                  </h1>
-                  <div className='flex text-lg'>
+                  <div className='flex justify-center sm:justify-between'>
+                    <h1 className='mb-5 text-2xl font-bold'>
+                      {name}
+                    </h1>
+                    <a href={html_url} target='_blank'>
+                      <GithubIcon className='ml-2 sm:ml-0 sm:self-center w-8 h-8 sm:w-10 sm:h-10 cursor-pointer hover:text-black' />
+                    </a>
+                  </div>
+                  <div className='sm:flex text-lg'>
                     <img
                       className='h-full w-full sm:h-28 sm:w-28 rounded-md'
-                      src={owner.avatar_url}
+                      src={owner?.avatar_url}
                       alt='user'
                     />
-                    <div className='ml-6 self-center'>
+                    <div className='text-center sm:text-left sm:ml-6 self-center mt-4 sm:mt-0'>
                       <h2 className=''>
                         by {owner?.login}
                       </h2>
@@ -85,13 +91,11 @@ function RepoDetailsPage({ open, setOpen, data }) {
                     </div>
                   </div>
                 </div>
-
                 <div className='px-8 pb-5 pt-3'>
                   <div className='flex justify-between border-b-2 pb-1 mb-1 text-lg font-medium'>
-                    <h4>
+                    <h4 className='hidden sm:inline'>
                       ABOUT REPO
                     </h4>
-
                     {data?.private ? (
                       <div className='flex'>
                         <LockIcon className='self-center w-5 h-5 mr-1.5' />
