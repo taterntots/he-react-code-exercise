@@ -3,11 +3,14 @@ import React, { useState, useEffect } from 'react';
 // FORMS
 import { useForm } from 'react-hook-form';
 
+// COMPONENTS
+import LoadSpinner from './utils/LoadSpinner';
+
 // ----------------------------------------------------------------------------------
 // --------------------------------- SEARCH BAR -------------------------------------
 // ----------------------------------------------------------------------------------
 
-function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSearchResults }) {
+function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSearchResults, isLoading }) {
   const [filteredLanguageTerm, setFilteredLanguageTerm] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -50,10 +53,17 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
           <span className='text-red-600'>{errors.search_term.message}</span>
         )}
         <button
-          className='p-3 bg-buttons hover:bg-sitebackground rounded-md font-medium'
+          className={isLoading ?
+            'opacity-80 pointer-events-none p-3 bg-buttons rounded-md font-medium' :
+            'p-3 bg-buttons hover:opacity-80 rounded-md font-medium'
+          }
           type='submit'
         >
-          Submit
+          {isLoading ? (
+            <div className='px-3'>
+              <LoadSpinner />
+            </div>
+          ) : 'Submit'}
         </button>
       </div>
 

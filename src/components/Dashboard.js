@@ -5,6 +5,7 @@ import axios from 'axios';
 import RepoCard from './RepoCard';
 import SearchBar from './SearchBar';
 import FilterBar from './FilterBar';
+import LoadSpinner from './utils/LoadSpinner';
 
 // ----------------------------------------------------------------------------------
 // --------------------------------- DASHBOARD --------------------------------------
@@ -15,9 +16,12 @@ function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [languageSearchResults, setLanguageSearchResults] = useState([]);
   const [sortType, setSortType] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // UseEffect to hit the github repositories API and set data to state
   useEffect(() => {
+    setIsLoading(true);
+
     axios({
       method: 'get',
       url: `https://api.github.com/search/repositories?q=${searchTerm}+language&${sortType}`,
@@ -26,18 +30,26 @@ function Dashboard() {
       }
     }).then(res => {
       setRepos(res.data.items);
-    });
+      setIsLoading(false);
+    })
+      .catch(err => {
+        console.log(err)
+        setIsLoading(false);
+      });
   }, [sortType, searchTerm])
 
   return (
     <>
-      <SearchBar repos={repos} setSearchTerm={setSearchTerm} sortType={sortType} setSortType={setSortType} setLanguageSearchResults={setLanguageSearchResults} />
+      <SearchBar repos={repos} setSearchTerm={setSearchTerm} sortType={sortType} setSortType={setSortType} setLanguageSearchResults={setLanguageSearchResults} isLoading={isLoading} />
       {/* <FilterBar setSortType={setSortType} /> */}
-      <div className='px-8 pb-8 pt-4 grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
-        {languageSearchResults.map(i =>
-          <RepoCard key={i.id} data={i} />
-        )}
-      </div>
+      {!isLoading && (
+        <div className='px-8 pb-8 pt-4 grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
+          {languageSearchResults.map(i =>
+            <RepoCard key={i.id} data={i} />
+          )}
+        </div>
+      )}
+      {/* <LoadSpinner /> */}
     </>
   );
 }
