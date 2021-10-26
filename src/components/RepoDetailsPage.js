@@ -68,7 +68,7 @@ function RepoDetailsPage({ open, setOpen, data }) {
                     <h1 className='mb-5 text-2xl font-bold'>
                       {name}
                     </h1>
-                    <a href={html_url} target='_blank'>
+                    <a className='cursor-default' href={html_url} target='_blank' rel="noreferrer">
                       <GithubIcon className='ml-2 sm:ml-0 sm:self-center w-8 h-8 sm:w-10 sm:h-10 cursor-pointer hover:text-black' />
                     </a>
                   </div>
