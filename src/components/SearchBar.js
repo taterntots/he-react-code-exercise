@@ -34,8 +34,8 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
   }
 
   return (
-    <form className='flex justify-between p-4 bg-searchbar' onSubmit={handleSubmit(onSubmit)}>
-      <div className='flex w-1/3'>
+    <form className='md:flex md:justify-between p-4 bg-searchbar' onSubmit={handleSubmit(onSubmit)}>
+      <div className='flex md:w-1/3 mb-3 md:mb-0'>
         <input
           className='w-full px-4 mr-4 rounded-md text-black text-xl'
           placeholder='Search keyword'
@@ -50,7 +50,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
           })}
         />
         {errors.search_term && (
-          <span className='text-red-600'>{errors.search_term.message}</span>
+          <span className='text-red-600 mr-1'>{errors.search_term.message}</span>
         )}
         <button
           className={isLoading ?
@@ -67,9 +67,9 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
         </button>
       </div>
 
-      <div className='flex w-1/3'>
+      <div className='flex md:w-1/3 mb-3 md:mb-0'>
         <input
-          className='w-full px-4 rounded-md text-black text-xl'
+          className='w-full px-4 py-2 rounded-md text-black text-xl'
           placeholder='Filter by language'
           name='language'
           type='search'
@@ -77,7 +77,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
         />
       </div>
 
-      <div>
+      <div className='flex justify-center md:inline'>
         <button
           className={sortType === 'sort=stars' ?
             'p-3 mr-6 bg-sitebackground hover:opacity-80 rounded-md font-medium' :
