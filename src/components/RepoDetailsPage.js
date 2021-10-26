@@ -1,8 +1,11 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import moment from 'moment';
 
 // IMAGES
 import { ReactComponent as StarIcon } from '../imgs/star.svg';
+import { ReactComponent as LockIcon } from '../imgs/lock.svg';
+import { ReactComponent as UnlockIcon } from '../imgs/unlock.svg';
 
 // ----------------------------------------------------------------------------------
 // ------------------------------ REPO DETAILS PAGE ---------------------------------
@@ -15,7 +18,8 @@ function RepoDetailsPage({ open, setOpen, data }) {
     owner,
     language,
     description,
-    stargazers_count
+    stargazers_count,
+    updated_at
   } = data;
   console.log('WOOT', data)
 
@@ -56,33 +60,60 @@ function RepoDetailsPage({ open, setOpen, data }) {
             leaveFrom='opacity-100 translate-y-0 sm:scale-100'
             leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
           >
-            <div className='inline-block w-full mx-6 align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all mb-6 mt-20 sm:mt-20 max-w-lg'>
-              <div className='p-7 bg-cardbanner text-white'>
-                <h1 className=''>
-                  {name}
-                </h1>
-                <div>
+            <div className='inline-block w-full mx-6 align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all max-w-lg'>
+              <div className='bg-white text-black'>
+                <div className='py-5 px-8 bg-cardbanner text-white'>
+                  <h1 className='mb-5 text-2xl font-bold'>
+                    {name}
+                  </h1>
+                  <div className='flex text-lg'>
+                    <img
+                      className='h-full w-full sm:h-28 sm:w-28 rounded-md'
+                      src={owner.avatar_url}
+                      alt='user'
+                    />
+                    <div className='ml-6 self-center'>
+                      <h2 className=''>
+                        by {owner?.login}
+                      </h2>
+                      <h3>
+                        Language: {language}
+                      </h3>
+                      <h3>
+                        Last Updated: {moment(updated_at).format('YYYY-MM-DD')}
+                      </h3>
+                    </div>
+                  </div>
                 </div>
-                <img
-                  className='h-full w-full sm:h-28 sm:w-28 rounded-tl-md rounded-tr-md sm:rounded-tr-none'
-                  src={owner.avatar_url}
-                  alt='user'
-                />
-                <h2 className=''>
-                  {owner?.login}
-                </h2>
-                <div className='flex'>
-                  <StarIcon className='self-center w-5 h-5 mr-1.5' />
-                  <h3 className='font-bold'>
-                    {stargazers_count}
-                  </h3>
+
+                <div className='px-8 pb-5 pt-3'>
+                  <div className='flex justify-between border-b-2 pb-1 mb-1 text-lg font-medium'>
+                    <h4>
+                      ABOUT REPO
+                    </h4>
+
+                    {data?.private ? (
+                      <div className='flex'>
+                        <LockIcon className='self-center w-5 h-5 mr-1.5' />
+                        <h3>Private</h3>
+                      </div>
+                    ) : (
+                      <div className='flex'>
+                        <UnlockIcon className='self-center w-5 h-5 mr-1.5' />
+                        <h3>Public</h3>
+                      </div>)}
+
+                    <div className='flex'>
+                      <StarIcon className='self-center w-5 h-5 mr-1.5' />
+                      <h3>
+                        {stargazers_count}
+                      </h3>
+                    </div>
+                  </div>
+                  <p>
+                    {description}
+                  </p>
                 </div>
-                <h3>
-                  {language}
-                </h3>
-                <p>
-                  {description}
-                </p>
               </div>
             </div>
           </Transition.Child>
