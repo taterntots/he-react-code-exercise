@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 // --------------------------------- SEARCH BAR -------------------------------------
 // ----------------------------------------------------------------------------------
 
-function SearchBar({ repos, setSearchTerm, setSortType, setLanguageSearchResults }) {
+function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSearchResults }) {
   const [filteredLanguageTerm, setFilteredLanguageTerm] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -38,8 +38,17 @@ function SearchBar({ repos, setSearchTerm, setSortType, setLanguageSearchResults
           placeholder='Search keyword'
           name='search_term'
           type='search'
-          {...register('search_term')}
+          {...register('search_term', {
+            required: 'Field cannot be empty',
+            minLength: {
+              value: 2,
+              message: 'Repos must be at least 3 characters'
+            }
+          })}
         />
+        {errors.search_term && (
+          <span className='text-red-600'>{errors.search_term.message}</span>
+        )}
         <button
           className='p-3 bg-buttons hover:bg-sitebackground rounded-md font-medium'
           type='submit'
@@ -51,7 +60,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, setLanguageSearchResults
       <div className='flex w-1/3'>
         <input
           className='w-full px-4 rounded-md text-black text-xl'
-          placeholder='Filter language'
+          placeholder='Filter by language'
           name='language'
           type='search'
           onChange={handleInputChange}
@@ -60,14 +69,19 @@ function SearchBar({ repos, setSearchTerm, setSortType, setLanguageSearchResults
 
       <div>
         <button
-          className='p-3 mr-6 bg-buttons hover:bg-sitebackground rounded-md font-medium'
+          className={sortType === 'sort=stars' ?
+            'p-3 mr-6 bg-sitebackground hover:opacity-80 rounded-md font-medium' :
+            'p-3 mr-6 bg-buttons hover:opacity-80 rounded-md font-medium'
+          }
           onClick={() => setSortType('')}
         >
           Best Match
         </button>
         <button
-          className='p-3 bg-buttons hover:bg-sitebackground rounded-md font-medium'
-          onClick={() => setSortType('sort=stars')}
+          className={sortType === 'sort=stars' ?
+            'p-3 bg-buttons hover:opacity-80 rounded-md font-medium' :
+            'p-3 bg-sitebackground hover:opacity-80 rounded-md font-medium'
+          } onClick={() => setSortType('sort=stars')}
         >
           Total Stars
         </button>

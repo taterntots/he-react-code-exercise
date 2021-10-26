@@ -20,7 +20,7 @@ function Dashboard() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://api.github.com/search/repositories?q=${searchTerm}+language&${sortType}&order=desc`,
+      url: `https://api.github.com/search/repositories?q=${searchTerm}+language&${sortType}`,
       headers: {
         Accept: 'application/vnd.github.v3+json'
       }
@@ -31,7 +31,7 @@ function Dashboard() {
 
   return (
     <>
-      <SearchBar repos={repos} setSearchTerm={setSearchTerm} setSortType={setSortType} setLanguageSearchResults={setLanguageSearchResults} />
+      <SearchBar repos={repos} setSearchTerm={setSearchTerm} sortType={sortType} setSortType={setSortType} setLanguageSearchResults={setLanguageSearchResults} />
       {/* <FilterBar setSortType={setSortType} /> */}
       <div className='px-8 pb-8 pt-4 grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
         {languageSearchResults.map(i =>
