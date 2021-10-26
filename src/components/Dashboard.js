@@ -12,19 +12,20 @@ import SearchError from './utils/SearchError';
 // ----------------------------------------------------------------------------------
 
 function Dashboard() {
-  const [repos, setRepos] = useState([]);
+  const [repos, setRepos] = useState([]); // Sorted by Best Match
+  const [starSortedRepos, setStarSortedRepos] = useState([]); // Sorted by Total Stars
   const [searchTerm, setSearchTerm] = useState('');
   const [languageSearchResults, setLanguageSearchResults] = useState([]);
-  const [sortType, setSortType] = useState('');
+  const [sortType, setSortType] = useState('best');
   const [isLoading, setIsLoading] = useState(false);
 
-  // UseEffect to hit the github repositories API and set data to state
+  // UseEffect to hit the github repositories API and set best match data to state
   useEffect(() => {
     setIsLoading(true);
 
     axios({
       method: 'get',
-      url: `https://api.github.com/search/repositories?q=${searchTerm}+language&${sortType}`,
+      url: `https://api.github.com/search/repositories?q=${searchTerm}+language`,
       headers: {
         Accept: 'application/vnd.github.v3+json'
       }
@@ -36,11 +37,35 @@ function Dashboard() {
         console.log(err)
         setIsLoading(false);
       });
-  }, [sortType, searchTerm])
+  }, [searchTerm])
+
+  // UseEffect to hit the github repositories API and set data sorted by stars to state
+  // (Originally I had string interpolated the sort method in a single axios call. However, to 
+  // avoid hitting the third party API too often, I figured it would be best to set results
+  // sorted by stars to a separate state from the start. That way, toggling sort methods does not 
+  // hit the API on each button click. )
+  useEffect(() => {
+    setIsLoading(true);
+
+    axios({
+      method: 'get',
+      url: `https://api.github.com/search/repositories?q=${searchTerm}+language&sort=stars`,
+      headers: {
+        Accept: 'application/vnd.github.v3+json'
+      }
+    }).then(res => {
+      setStarSortedRepos(res.data.items);
+      setIsLoading(false);
+    })
+      .catch(err => {
+        console.log(err)
+        setIsLoading(false);
+      });
+  }, [searchTerm])
 
   return (
     <>
-      <SearchBar repos={repos} setSearchTerm={setSearchTerm} sortType={sortType} setSortType={setSortType} setLanguageSearchResults={setLanguageSearchResults} isLoading={isLoading} />
+      <SearchBar repos={sortType === 'stars' ? starSortedRepos : repos} setSearchTerm={setSearchTerm} sortType={sortType} setSortType={setSortType} setLanguageSearchResults={setLanguageSearchResults} isLoading={isLoading} />
       {isLoading ? (
         <div className='min-h-screen mt-10'>
           <LoadSpinner size={100} />

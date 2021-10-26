@@ -44,7 +44,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
           {...register('search_term', {
             required: 'Field cannot be empty',
             minLength: {
-              value: 2,
+              value: 3,
               message: 'Repos must be at least 3 characters'
             }
           })}
@@ -79,7 +79,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
 
       <div className='flex justify-center md:inline'>
         <button
-          className={sortType === 'sort=stars' ?
+          className={sortType === 'stars' ?
             'p-3 mr-6 bg-sitebackground hover:opacity-80 rounded-md font-medium' :
             'p-3 mr-6 bg-buttons hover:opacity-80 rounded-md font-medium'
           }
@@ -88,10 +88,10 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
           Best Match
         </button>
         <button
-          className={sortType === 'sort=stars' ?
+          className={sortType === 'stars' ?
             'p-3 bg-buttons hover:opacity-80 rounded-md font-medium' :
             'p-3 bg-sitebackground hover:opacity-80 rounded-md font-medium'
-          } onClick={() => setSortType('sort=stars')}
+          } onClick={() => setSortType('stars')}
         >
           Total Stars
         </button>
