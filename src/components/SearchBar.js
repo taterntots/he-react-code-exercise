@@ -20,7 +20,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
       repo?.language?.toLowerCase().includes(filteredLanguageTerm.toLowerCase())
     );
     setLanguageSearchResults(results);
-  }, [filteredLanguageTerm, repos]);
+  }, [filteredLanguageTerm, setLanguageSearchResults, repos]);
 
   // Function for handling input for language filter
   const handleInputChange = (event) => {
@@ -45,7 +45,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
             required: 'Field cannot be empty',
             minLength: {
               value: 3,
-              message: 'Repos must be at least 3 characters'
+              message: '3 character minimum'
             }
           })}
         />
