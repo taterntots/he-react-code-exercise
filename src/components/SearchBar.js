@@ -58,6 +58,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
             'p-3 bg-buttons hover:opacity-80 rounded-md font-medium'
           }
           type='submit'
+          data-cy='searchSubmit'
         >
           {isLoading ? (
             <div className='px-3'>
@@ -84,6 +85,7 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
             'p-3 mr-6 bg-buttons hover:opacity-80 rounded-md font-medium'
           }
           onClick={() => setSortType('')}
+          data-cy='sortBest'
         >
           Best Match
         </button>
@@ -91,7 +93,9 @@ function SearchBar({ repos, setSearchTerm, setSortType, sortType, setLanguageSea
           className={sortType === 'stars' ?
             'p-3 bg-buttons hover:opacity-80 rounded-md font-medium' :
             'p-3 bg-sitebackground hover:opacity-80 rounded-md font-medium'
-          } onClick={() => setSortType('stars')}
+          }
+          onClick={() => setSortType('stars')}
+          data-cy='sortStar'
         >
           Total Stars
         </button>

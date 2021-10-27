@@ -34,6 +34,7 @@ function Dashboard() {
         Accept: 'application/vnd.github.v3+json'
       }
     }).then(res => {
+      console.log(res)
       setRepos(res.data.items);
       setIsLoading(false);
     })

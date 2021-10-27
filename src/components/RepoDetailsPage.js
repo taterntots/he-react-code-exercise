@@ -35,6 +35,7 @@ function RepoDetailsPage({ open, setOpen, data }) {
         onClose={() => {
           setOpen(false)
         }}
+        data-cy='fadedDiv'
       >
         <div className='flex items-center justify-center min-h-screen text-center block'>
           <Transition.Child
