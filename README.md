@@ -25,6 +25,7 @@ To get the server running locally:
 For testing:
 ```bash
 - **npm run cypress:open** to run testing with cypress
+- **open my_tests.js under 'INTEGRATION TESTS' to find and run tests
 ```
 
 ## Tech Stack
@@ -42,7 +43,7 @@ For testing:
 ## Authentication API
 
 This project uses Github's search API at the following address to grab repository data:
-'https://api.github.com/search/repositories'
+https://api.github.com/search/repositories
 
 # Environment Variables
 
