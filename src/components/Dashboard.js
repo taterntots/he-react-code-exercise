@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import cogoToast from 'cogo-toast';
 
 // COMPONENTS
 import RepoCard from './RepoCard';
@@ -40,9 +39,7 @@ function Dashboard() {
     })
       .catch(err => {
         console.log(err)
-        cogoToast.error(`There was an error hitting Github's API sorted by best match`, {
-          hideAfter: 5,
-        });
+        alert(`There was an error hitting Github's API sorted by best match`)
         setIsLoading(false);
       });
   }, [searchTerm])
@@ -67,9 +64,7 @@ function Dashboard() {
     })
       .catch(err => {
         console.log(err)
-        cogoToast.error(`There was an error hitting Github's API sorted by stars`, {
-          hideAfter: 5,
-        });
+        alert(`There was an error hitting Github's API sorted by stars`)
         setIsLoading(false);
       });
   }, [searchTerm])
