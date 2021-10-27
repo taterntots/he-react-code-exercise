@@ -1,6 +1,6 @@
 # Documentation
 
-You can find the deployed project on [Netlify](https://eager-curie-6f78bc.netlify.app).
+You can find the deployed project on [Netlify](https://sleepy-almeida-97ede1.netlify.app/).
 
 ## Project Overview
 
@@ -36,7 +36,7 @@ For testing:
 - [Tailwind](https://tailwindcss.com/): Tailwind CSS lets you rapidly build modern websites without ever leaving your HTML. Simple to implement and build beautiful looking apps fast.
 - [Cypress](https://docs.cypress.io/): Fast, easy and reliable testing for anything that runs in a browser. Amazing UI tool for making setting up, writing, and running tests a breeze and easy to visualize.
 
-#### Front end deployed to [Netlify](https://eager-curie-6f78bc.netlify.app).
+#### Front end deployed to [Netlify](https://sleepy-almeida-97ede1.netlify.app/).
 
 # APIs
 
